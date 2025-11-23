@@ -1,0 +1,8 @@
+[package]
+name = "h2l0l"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+notify-rust = "4.11.7"
+sysinfo = "0.36.1"
