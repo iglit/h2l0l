@@ -1,7 +1,7 @@
-h2l0l\src\monitor.rs
 //! Module for monitoring if a specific process is running.
 
-use sysinfo::{System, SystemExt, ProcessExt};
+use std::ffi::OsStr;
+use sysinfo::System;
 
 /// Checks if a process with the given name is currently running.
 ///
@@ -14,6 +14,7 @@ use sysinfo::{System, SystemExt, ProcessExt};
 /// `true` if the process is running, `false` otherwise.
 pub fn is_process_running(process_name: &str) -> bool {
     let mut sys = System::new_all();
-    sys.refresh_processes();
-    sys.processes_by_name(process_name).next().is_some()
+    sys.refresh_all();
+    let os_name = OsStr::new(process_name);
+    sys.processes_by_name(os_name).next().is_some()
 }
