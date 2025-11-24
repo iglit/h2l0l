@@ -113,7 +113,7 @@ fn main() {
         .with_menu(Box::new(menu))
         .with_tooltip("h2l0l - Hydration Reminder")
         .with_icon(icon)
-        .with_menu_on_left_click(true); // Enable left-click menu for Windows
+        .with_menu_on_left_click(false); // Right-click only for menu
 
     // On macOS, also show the emoji for extra visibility
     #[cfg(target_os = "macos")]
@@ -130,7 +130,7 @@ fn main() {
 
     #[cfg(target_os = "windows")]
     println!(
-        "Tray icon created in system tray (look for blue droplet at bottom-right). Left-click or right-click it and select Quit to exit."
+        "Tray icon created in system tray (look for blue droplet at bottom-right). Right-click it and select Quit to exit."
     );
 
     // Main event loop for menu events and tray icon clicks
