@@ -19,8 +19,8 @@ This application works on both **Windows** and **macOS**:
 - **macOS**: Monitors `League of Legends` process
 
 The tray icon appears in:
-- Windows: System tray (bottom right)
-- macOS: Menu bar (top right)
+- **Windows**: System tray (bottom right) - **Left-click or right-click** to open the menu
+- **macOS**: Menu bar (top right) - Click to open the menu
 
 ## Installation
 
@@ -51,10 +51,12 @@ Or run the compiled binary directly:
 ## Usage
 
 1. Start the application
-2. A tray icon will appear in your system tray/menu bar
+2. A tray icon will appear in your system tray/menu bar (blue water droplet 💧)
 3. The app will run in the background monitoring for League of Legends
 4. When you finish a game, you'll receive a notification reminding you to hydrate
-5. To quit: Click the tray icon and select "Quit"
+5. To quit: 
+   - **Windows**: Left-click or right-click the tray icon and select "Quit"
+   - **macOS**: Click the menu bar icon and select "Quit"
 
 ## Configuration
 
@@ -95,9 +97,16 @@ cargo build --release
 ## Troubleshooting
 
 ### The tray icon doesn't appear
+- Look for a blue water droplet icon (💧 on macOS)
+- On Windows, check if the icon is hidden in the overflow area (click the up arrow near the system tray)
 - Make sure you have permission to display notifications on your system
 - On macOS, check System Preferences → Notifications
 - On Windows, check Settings → System → Notifications & actions
+
+### The menu doesn't appear when I click the icon (Windows)
+- Try both left-click and right-click on the icon
+- The app is configured to show the menu on both left and right clicks
+- If the icon is unresponsive, try restarting the application
 
 ### The notification doesn't show
 - Verify that desktop notifications are enabled for the application
