@@ -68,13 +68,17 @@ fn main() {
     menu.append(&quit_item).unwrap();
 
     // Create the tray icon
+    // Note: On macOS, this will appear in the menu bar (top-right)
     let _tray_icon = TrayIconBuilder::new()
         .with_menu(Box::new(menu))
         .with_tooltip("h2l0l - Hydration Reminder")
+        .with_title("💧") // Water droplet emoji for visibility in menu bar
         .build()
         .expect("Failed to create tray icon");
 
-    println!("Tray icon created. Click the icon and select Quit to exit.");
+    println!(
+        "Tray icon created in menu bar (look for 💧 at top-right). Click it and select Quit to exit."
+    );
 
     // Main event loop for menu events
     let menu_channel = MenuEvent::receiver();
