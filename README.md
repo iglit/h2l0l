@@ -1,6 +1,6 @@
 # h2l0l - Hydration Reminder
 
-A system tray application that monitors for League of Legends games and reminds you to drink water after each game.
+A Windows system tray application that monitors for League of Legends games and reminds you to drink water after each game.
 
 ## Features
 
@@ -11,16 +11,11 @@ A system tray application that monitors for League of Legends games and reminds 
 - ⚙️ Configurable polling interval
 - 🚪 Easy quit option from tray menu
 
-## Cross-Platform Support
+## Platform Support
 
-This application works on both **Windows** and **macOS**:
+This application is designed for **Windows only** and monitors `League of Legends.exe`.
 
-- **Windows**: Monitors `League of Legends.exe`
-- **macOS**: Monitors `League of Legends` process
-
-The tray icon appears in:
-- **Windows**: System tray (bottom right) - **Right-click** to open the menu
-- **macOS**: Menu bar (top right) - **Click** to open the menu
+The tray icon appears in the system tray (bottom right) - **Right-click** to open the menu.
 
 ## Installation
 
@@ -44,27 +39,22 @@ cargo build --release
 cargo run --release
 ```
 
-Or run the compiled binary directly:
-- **Windows**: `target/release/h2l0l.exe`
-- **macOS/Linux**: `target/release/h2l0l`
+Or run the compiled binary directly from `target/release/h2l0l.exe`
 
 ## Usage
 
 1. Start the application
-2. A tray icon will appear in your system tray/menu bar (blue water droplet 💧)
+2. A tray icon will appear in your system tray (blue water droplet 💧)
 3. The app will run in the background monitoring for League of Legends
 4. When you finish a game, you'll receive a notification reminding you to hydrate
-5. To quit: 
-   - **Windows**: Right-click the tray icon and select "Quit"
-   - **macOS**: Click the menu bar icon and select "Quit"
+5. To quit: Right-click the tray icon and select "Quit"
 
 ## Configuration
 
 You can modify the following constants in `src/config.rs`:
 
 - `POLL_INTERVAL_SECS`: How often to check if the game is running (default: 30 seconds)
-
-The process name is automatically set based on your operating system and doesn't need to be changed.
+- `PROCESS_NAME`: The process name to monitor (default: "League of Legends.exe")
 
 ## How It Works
 
@@ -78,7 +68,7 @@ The process name is automatically set based on your operating system and doesn't
 - `sysinfo` - For monitoring system processes
 - `notify-rust` - For sending desktop notifications
 - `tray-icon` - For creating the system tray icon
-- `cocoa` (macOS only) - For proper macOS event loop handling
+- `image` - For icon creation
 
 ## Development
 
@@ -97,13 +87,12 @@ cargo build --release
 ## Troubleshooting
 
 ### The tray icon doesn't appear
-- Look for a blue water droplet icon (💧 on macOS)
-- On Windows, check if the icon is hidden in the overflow area (click the up arrow near the system tray)
-- Make sure you have permission to display notifications on your system
-- On macOS, check System Preferences → Notifications
-- On Windows, check Settings → System → Notifications & actions
+- Look for a blue water droplet icon
+- Check if the icon is hidden in the overflow area (click the up arrow near the system tray)
+- Make sure you have permission to display notifications
+- Check Settings → System → Notifications & actions
 
-### The menu doesn't appear when I click the icon (Windows)
+### The menu doesn't appear when I click the icon
 - Make sure you're using right-click (not left-click)
 - The menu only appears on right-click
 - If the icon is unresponsive, try restarting the application
@@ -113,8 +102,8 @@ cargo build --release
 - Check that the League of Legends process name matches your system
 
 ### The app doesn't detect the game
-- The default process name is "League of Legends.exe" on Windows and "League of Legends" on macOS
-- If your game has a different process name, you may need to modify `src/config.rs`
+- The default process name is "League of Legends.exe"
+- If your game has a different process name, you may need to modify `PROCESS_NAME` in `src/config.rs`
 
 ## License
 

@@ -42,14 +42,6 @@ fn create_water_icon() -> Icon {
 fn main() {
     println!("h2l0l hydration reminder started as tray icon...");
 
-    // Initialize macOS application
-    #[cfg(target_os = "macos")]
-    unsafe {
-        use cocoa::appkit::NSApplication;
-        use cocoa::base::nil;
-        let _app = NSApplication::sharedApplication(nil);
-    }
-
     // Channel to signal when to quit
     let (tx, rx) = mpsc::channel();
 
@@ -106,29 +98,15 @@ fn main() {
     // Create the water droplet icon
     let icon = create_water_icon();
 
-    // Create the tray icon
-    // Note: On macOS, this will appear in the menu bar (top-right)
-    //       On Windows, this will appear in the system tray (bottom-right)
-    let mut tray_builder = TrayIconBuilder::new()
+    // Create the tray icon for Windows system tray
+    let _tray_icon = TrayIconBuilder::new()
         .with_menu(Box::new(menu))
         .with_tooltip("h2l0l - Hydration Reminder")
         .with_icon(icon)
-        .with_menu_on_left_click(false); // Right-click only for menu
+        .with_menu_on_left_click(false) // Right-click only for menu
+        .build()
+        .expect("Failed to create tray icon");
 
-    // On macOS, also show the emoji for extra visibility
-    #[cfg(target_os = "macos")]
-    {
-        tray_builder = tray_builder.with_title("💧");
-    }
-
-    let _tray_icon = tray_builder.build().expect("Failed to create tray icon");
-
-    #[cfg(target_os = "macos")]
-    println!(
-        "Tray icon created in menu bar (look for 💧 at top-right). Click it and select Quit to exit."
-    );
-
-    #[cfg(target_os = "windows")]
     println!(
         "Tray icon created in system tray (look for blue droplet at bottom-right). Right-click it and select Quit to exit."
     );
@@ -158,27 +136,6 @@ fn main() {
             }
         }
 
-        // Pump macOS event loop to keep the tray icon responsive
-        #[cfg(target_os = "macos")]
-        unsafe {
-            use cocoa::appkit::{NSApplication, NSEventMask};
-            use cocoa::base::nil;
-            use cocoa::foundation::{NSDate, NSDefaultRunLoopMode};
-
-            let app = NSApplication::sharedApplication(nil);
-            let distant_past = NSDate::distantPast(nil);
-            let event = app.nextEventMatchingMask_untilDate_inMode_dequeue_(
-                NSEventMask::NSAnyEventMask.bits(),
-                distant_past,
-                NSDefaultRunLoopMode,
-                true,
-            );
-            if event != nil {
-                app.sendEvent_(event);
-            }
-        }
-
-        // Sleep briefly to avoid spinning the CPU
         thread::sleep(Duration::from_millis(100));
     }
 }

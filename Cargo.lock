@@ -944,7 +944,6 @@ dependencies = [
 name = "h2l0l"
 version = "0.1.0"
 dependencies = [
- "cocoa",
  "image",
  "notify-rust",
  "sysinfo",
