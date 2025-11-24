@@ -19,8 +19,8 @@ This application works on both **Windows** and **macOS**:
 - **macOS**: Monitors `League of Legends` process
 
 The tray icon appears in:
-- **Windows**: System tray (bottom right) - **Left-click or right-click** to open the menu
-- **macOS**: Menu bar (top right) - Click to open the menu
+- **Windows**: System tray (bottom right) - **Right-click** to open the menu
+- **macOS**: Menu bar (top right) - **Click** to open the menu
 
 ## Installation
 
@@ -55,7 +55,7 @@ Or run the compiled binary directly:
 3. The app will run in the background monitoring for League of Legends
 4. When you finish a game, you'll receive a notification reminding you to hydrate
 5. To quit: 
-   - **Windows**: Left-click or right-click the tray icon and select "Quit"
+   - **Windows**: Right-click the tray icon and select "Quit"
    - **macOS**: Click the menu bar icon and select "Quit"
 
 ## Configuration
@@ -104,8 +104,8 @@ cargo build --release
 - On Windows, check Settings → System → Notifications & actions
 
 ### The menu doesn't appear when I click the icon (Windows)
-- Try both left-click and right-click on the icon
-- The app is configured to show the menu on both left and right clicks
+- Make sure you're using right-click (not left-click)
+- The menu only appears on right-click
 - If the icon is unresponsive, try restarting the application
 
 ### The notification doesn't show
